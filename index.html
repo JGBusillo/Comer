@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExoLeather | Raw Luxury & Trazabilidad</title>
+    <!-- Fuentes premium -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #050505;
+            --bg-panel: #111111;
+            --gold-accent: #c09e57;
+            --gold-hover: #e0bb6a;
+            --burgundy: #6b1d2f;
+            --text-main: #f0f0f0;
+            --text-muted: #888888;
+            --transition-slow: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Lato', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 400; }
+
+        /* --- HEADER --- */
+        header {
+            background-color: rgba(5, 5, 5, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 20px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(192, 158, 87, 0.15);
+            transition: all 0.4s ease;
+        }
+
+        .logo-img { height: 40px; width: auto; transition: transform 0.4s ease; }
+        .logo-img:hover { transform: scale(1.05); }
+
+        nav ul { list-style: none; display: flex; gap: 40px; align-items: center; }
+
+        nav a {
+            color: var(--text-main); text-decoration: none; font-size: 12px;
+            letter-spacing: 2px; text-transform: uppercase; transition: color 0.4s ease;
+        }
+
+        nav a:hover, .cart-btn:hover { color: var(--gold-accent); cursor: pointer; }
+
+        .cart-btn {
+            background: none; border: none; color: var(--text-main);
+            font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+            display: flex; align-items: center; gap: 8px;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('img/fondo_claroscuro.jpg') center/cover no-repeat;
+            padding: 0 20px;
+        }
+
+        .hero h2 {
+            font-size: 72px; color: var(--gold-accent); margin-bottom: 20px;
+            letter-spacing: 4px; opacity: 0; transform: translateY(30px);
+            animation: fadeUp 1.2s forwards 0.3s;
+        }
+
+        .hero p {
+            font-size: 18px; max-width: 600px; color: var(--text-muted); margin-bottom: 40px;
+            letter-spacing: 1px; opacity: 0; transform: translateY(30px);
+            animation: fadeUp 1.2s forwards 0.6s;
+        }
+
+        .btn {
+            display: inline-block; padding: 15px 40px; background: transparent;
+            color: var(--gold-accent); border: 1px solid var(--gold-accent);
+            text-decoration: none; text-transform: uppercase; letter-spacing: 2px;
+            font-size: 12px; transition: all 0.4s ease; cursor: pointer;
+            opacity: 0; transform: translateY(30px); animation: fadeUp 1.2s forwards 0.9s;
+        }
+
+        .btn:hover { background: var(--gold-accent); color: var(--bg-dark); }
+
+        /* --- SECCIONES GENERALES --- */
+        section { padding: 120px 60px; max-width: 1400px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 70px; }
+        .section-header h2 { font-size: 42px; color: var(--gold-accent); margin-bottom: 15px; }
+        .section-header p { color: var(--text-muted); font-size: 16px; letter-spacing: 1px; }
+
+        /* --- PRODUCT GRID --- */
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
+
+        .product-card {
+            background-color: var(--bg-panel); padding: 30px;
+            border: 1px solid rgba(255,255,255,0.05);
+            display: flex; flex-direction: column; justify-content: space-between;
+            transition: var(--transition-slow);
+            opacity: 0; transform: translateY(50px);
+        }
+
+        .product-card.visible { opacity: 1; transform: translateY(0); }
+        .product-card:hover { border-color: rgba(192, 158, 87, 0.3); transform: translateY(-10px); }
+
+        .img-container { overflow: hidden; margin-bottom: 25px; aspect-ratio: 4/3; }
+        .product-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; }
+        .product-card:hover img { transform: scale(1.08); }
+
+        .product-card h3 { font-size: 24px; margin-bottom: 8px; color: var(--text-main); }
+        .price { font-size: 18px; color: var(--gold-accent); margin-bottom: 15px; font-family: 'Playfair Display', serif; }
+        .desc { font-size: 14px; color: var(--text-muted); margin-bottom: 25px; flex-grow: 1; }
+        
+        .btn-buy { background: var(--bg-dark); color: var(--gold-accent); width: 100%; text-align: center; border: 1px solid var(--gold-accent); }
+        .btn-buy:hover { background: var(--gold-accent); color: var(--bg-dark); }
+
+        /* --- VIDEO AD SECTION --- */
+        .video-section {
+            position: relative;
+            width: 100vw;
+            max-width: 100%;
+            height: 70vh;
+            min-height: 500px;
+            background-color: #000;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 80px 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .video-section video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translateX(-50%) translateY(-50%);
+            object-fit: cover;
+            opacity: 0.5;
+            transition: opacity 0.8s ease;
+        }
+
+        .video-section:hover video { opacity: 0.8; }
+
+        .video-overlay {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            pointer-events: none;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition-slow);
+        }
+
+        .video-overlay.visible { opacity: 1; transform: translateY(0); }
+
+        .video-overlay h2 {
+            font-size: 52px;
+            color: var(--gold-accent);
+            margin-bottom: 15px;
+            letter-spacing: 6px;
+        }
+
+        .video-overlay p {
+            font-size: 14px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--text-main);
+        }
+
+        /* --- LAYOUT TEXTO + IMAGEN --- */
+        .split-section {
+            display: flex; align-items: center; gap: 80px; margin: 80px 0;
+            opacity: 0; transform: translateY(50px); transition: var(--transition-slow);
+        }
+        .split-section.visible { opacity: 1; transform: translateY(0); }
+        .split-text { flex: 1; }
+        .split-text h3 { font-size: 38px; color: var(--gold-accent); margin-bottom: 25px; }
+        .split-text p { font-size: 16px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.8; }
+        .split-image { flex: 1; position: relative; }
+        .split-image img { width: 100%; height: auto; border: 1px solid rgba(255,255,255,0.1); filter: contrast(1.1) brightness(0.9); }
+
+        /* --- SIDE CART --- */
+        .cart-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7); backdrop-filter: blur(5px);
+            z-index: 1001; opacity: 0; visibility: hidden; transition: all 0.4s ease;
+        }
+        .cart-overlay.active { opacity: 1; visibility: visible; }
+        .cart-panel {
+            position: fixed; top: 0; right: -400px; width: 400px; height: 100vh;
+            background: var(--bg-panel); z-index: 1002; padding: 40px;
+            border-left: 1px solid rgba(192, 158, 87, 0.2);
+            transition: right 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex; flex-direction: column;
+        }
+        .cart-panel.active { right: 0; }
+        .cart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; border-bottom: 1px solid #333; padding-bottom: 20px; }
+        .cart-header h3 { color: var(--gold-accent); font-size: 24px; }
+        .close-cart { background: none; border: none; color: #fff; font-size: 24px; cursor: pointer; transition: color 0.3s; }
+        .close-cart:hover { color: var(--gold-accent); }
+        .cart-body { flex-grow: 1; color: var(--text-muted); text-align: center; display: flex; align-items: center; justify-content: center; flex-direction: column;}
+
+        /* --- FOOTER --- */
+        footer { text-align: center; padding: 80px 20px 40px; background-color: #020202; border-top: 1px solid #1a1a1a; }
+        .footer-logo { max-width: 150px; margin-bottom: 30px; opacity: 0.8; }
+        footer p { color: var(--text-muted); font-size: 11px; letter-spacing: 2px; }
+        
+        .academic-disclaimer {
+            margin-top: 40px; 
+            padding-top: 20px; 
+            border-top: 1px solid #1a1a1a; 
+            font-size: 10px; 
+            color: #555; 
+            max-width: 800px; 
+            margin-left: auto; 
+            margin-right: auto; 
+            line-height: 1.6; 
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 900px) {
+            .split-section { flex-direction: column; gap: 40px; }
+            .split-section.reverse { flex-direction: column; }
+            header { padding: 15px 30px; }
+            .cart-panel { width: 100%; right: -100%; }
+            .video-overlay h2 { font-size: 36px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo-link">
+            <img src="img/logo_exoleather.png" alt="ExoLeather Logo" class="logo-img">
+        </a>
+        <nav>
+            <ul>
+                <li><a href="#coleccion">Colección</a></li>
+                <li><a href="#campaña">Campaña</a></li>
+                <li><a href="#taller">Atelier</a></li>
+                <li><a href="#experiencia">Experiencia</a></li>
+                <li><button class="cart-btn" onclick="toggleCart()">Carrito</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h2>Lujo Sustentable</h2>
+        <p>Artesanía leonesa verificable. Una intersección perfecta entre el diseño vanguardista, la conservación de la naturaleza y la precisión mecánica.</p>
+        <a href="#coleccion" class="btn">Explorar el Catálogo</a>
+    </section>
+
+    <section id="coleccion">
+        <div class="section-header">
+            <h2>Colección Exclusiva</h2>
+            <p>Piezas sometidas a una estricta inspección y acabados de precisión antes de llegar a tus manos.</p>
+        </div>
+
+        <div class="product-grid">
+            <div class="product-card scroll-anim">
+                <div class="img-container"><img src="img/tarjetero_caiman.jpg" alt="Tarjetero Caimán Negro"></div>
+                <h3>Caimán Negro</h3>
+                <div class="price">$2,850 MXN</div>
+                <p class="desc">Edición numerada. Piel de Caiman crocodilus en acabado negro brillante con hilo encerado de alta densidad[cite: 1]. Incluye 6 ranuras organizadoras[cite: 1].</p>
+                <button class="btn btn-buy" onclick="preventCartAddition(event)">Añadir al Carrito</button>
+            </div>
+            <div class="product-card scroll-anim">
+                <div class="img-container"><img src="img/tarjetero_cocodrilo.jpg" alt="Tarjetero Cocodrilo Marrón Tabaco"></div>
+                <h3>Cocodrilo Tabaco</h3>
+                <div class="price">$2,950 MXN</div>
+                <p class="desc">Corte clásico que destaca por el uso de escamas gruesas en tono Marrón Tabaco[cite: 1]. Su diseño compacto ofrece robustez y un carácter sofisticado.</p>
+                <button class="btn btn-buy" onclick="preventCartAddition(event)">Añadir al Carrito</button>
+            </div>
+            <div class="product-card scroll-anim">
+                <div class="img-container"><img src="img/tarjetero_piton.jpg" alt="Tarjetero Pitón Natural"></div>
+                <h3>Pitón Natural</h3>
+                <div class="price">$2,600 MXN</div>
+                <p class="desc">Un diseño con patrón de diamante natural[cite: 1]. Ideal para quienes buscan un estilo vanguardista sin sacrificar la funcionalidad compacta[cite: 1].</p>
+                <button class="btn btn-buy" onclick="preventCartAddition(event)">Añadir al Carrito</button>
+            </div>
+            <div class="product-card scroll-anim">
+                <div class="img-container"><img src="img/tarjetero_avestruz.jpg" alt="Tarjetero Avestruz Gris Perla"></div>
+                <h3>Avestruz Gris</h3>
+                <div class="price">$2,750 MXN</div>
+                <p class="desc">Exclusivo cuero de avestruz en tono Gris Perla, caracterizado por sus distintivos poros de pluma[cite: 1]. Suavidad superior y resistencia inigualable.</p>
+                <button class="btn btn-buy" onclick="preventCartAddition(event)">Añadir al Carrito</button>
+            </div>
+            <div class="product-card scroll-anim">
+                <div class="img-container"><img src="img/pasaporte_exotico.jpg" alt="Portapasaporte Exótico"></div>
+                <h3>Portapasaporte</h3>
+                <div class="price">$4,100 MXN</div>
+                <p class="desc">Disponible en piel de pitón o cocodrilo con interiores forrados en microfibra y terciopelo[cite: 1]. Brinda protección, estatus y durabilidad a tus documentos[cite: 1].</p>
+                <button class="btn btn-buy" onclick="preventCartAddition(event)">Añadir al Carrito</button>
+            </div>
+            <div class="product-card scroll-anim">
+                <div class="img-container"><img src="img/airpods_avestruz.jpg" alt="Funda AirPods Avestruz"></div>
+                <h3>Estuche AirPods</h3>
+                <div class="price">$1,850 MXN</div>
+                <p class="desc">Piel de avestruz de lujo adherida sobre un chasis de policarbonato de alta resistencia[cite: 1]. Extiende la experiencia de la marca a tus dispositivos[cite: 1].</p>
+                <button class="btn btn-buy" onclick="preventCartAddition(event)">Añadir al Carrito</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="campaña" style="padding: 0;">
+        <div class="video-section">
+            <video autoplay loop muted playsinline>
+                <source src="vid/promocional.mp4" type="video/mp4">
+                Tu navegador no soporta la etiqueta de video.
+            </video>
+            <div class="video-overlay scroll-anim">
+                <h2>La Esencia del Lujo</h2>
+                <p>Artesanía que respira</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="taller">
+        <div class="split-section scroll-anim">
+            <div class="split-text">
+                <h3>Atelier e Ingeniería de Precisión</h3>
+                <p>Nuestro taller representa la convergencia entre la tradición marroquinera y la ingeniería mecánica aplicada. Desde el diseño estructural de las ranuras hasta el cálculo de la tensión del hilo encerado, cada pieza es sometida a una validación rigurosa.</p>
+                <p><strong>Personalización CO2 & CNC:</strong> Elevamos la exclusividad de tu artículo mediante sistemas de ruteo CNC y grabado por láser CO2. Con este nivel de precisión micrométrica, inscribimos tus iniciales en el interior de la piel sin comprometer sus propiedades mecánicas, creando una obra irrepetible.</p>
+            </div>
+            <div class="split-image">
+                <img src="img/taller_laser_cnc.jpg" alt="Grabado Láser y CNC ExoLeather">
+            </div>
+        </div>
+    </section>
+
+    <section id="experiencia">
+        <div class="split-section reverse scroll-anim" style="flex-direction: row-reverse;">
+            <div class="split-text">
+                <h3>Trazabilidad y Empaque Premium</h3>
+                <p>La experiencia de desempaque inicia con una caja rígida en Negro Lujo, acentuada con detalles en foil Oro Antiguo y un interior protector de microfibra burdeos[cite: 1].</p>
+                <p>Tu inversión está respaldada legalmente. Adjuntamos una etiqueta en cartulina de algodón Blanco Hueso con un código QR y sello CITES, garantizando la trazabilidad y origen responsable de la piel exótica[cite: 1]. Finalmente, resguardamos tu pieza en un dust bag de algodón peinado color negro, sellado con un resistente cordón de cáñamo natural[cite: 1].</p>
+            </div>
+            <div class="split-image">
+                <img src="img/empaque_cites.jpg" alt="Empaque Premium y CITES">
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <img src="img/logo_exoleather_blanco.png" alt="ExoLeather" class="footer-logo"><br>
+        <img src="img/sello_cites.png" alt="Certificación CITES" style="width: 60px; margin-bottom: 20px; opacity: 0.5;">
+        <p>&copy; 2026 EXOLEATHER. TODOS LOS DERECHOS RESERVADOS.<br>ARTESANÍA VERIFICABLE | LUJO SUSTENTABLE</p>
+        
+        <div class="academic-disclaimer">
+            <strong>AVISO LEGAL Y ACADÉMICO:</strong> Este sitio web es una simulación estructurada exclusivamente como proyecto para la asignatura de Comercialización y mercadotecnia (7° Semestre, Grupo 2) del Departamento de Ingeniería Mecánica Agrícola de la Universidad Autónoma Chapingo, desarrollado por J. Giovanni Bustillo Bardales. ExoLeather no es una entidad comercial operativa. La función de carrito de compras está deshabilitada. No se capturan datos bancarios, no se procesan pagos y no se realiza el envío de ningún artículo. Las imágenes y productos mostrados tienen fines netamente educativos.
+        </div>
+    </footer>
+
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="cart-panel" id="cartPanel">
+        <div class="cart-header">
+            <h3>Tu Selección</h3>
+            <button class="close-cart" onclick="toggleCart()">&times;</button>
+        </div>
+        <div class="cart-body">
+            <h4 style="color: var(--gold-accent); margin-bottom: 10px; font-family: 'Lato', sans-serif;">Simulación Académica</h4>
+            <p style="font-size: 13px; line-height: 1.5;">El carrito de compras se encuentra inhabilitado en esta demostración.</p>
+        </div>
+        <button class="btn btn-buy" style="margin-top: auto;" onclick="toggleCart()">Cerrar Panel</button>
+    </div>
+
+    <script>
+        // Alerta al intentar añadir al carrito
+        function preventCartAddition(event) {
+            event.preventDefault();
+            alert("Aviso: Acción denegada. El sistema de compras está deshabilitado. Este portal es una simulación académica y no procesa transacciones reales ni añade productos al carrito.");
+        }
+
+        // Abrir/Cerrar panel lateral del carrito vacío
+        function toggleCart() {
+            document.getElementById('cartOverlay').classList.toggle('active');
+            document.getElementById('cartPanel').classList.toggle('active');
+        }
+
+        // Animaciones al hacer scroll
+        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-anim').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
