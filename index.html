@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ExoLeather | Raw Luxury & Trazabilidad</title>
+    <!-- Fuentes premium -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -196,7 +197,7 @@
         .split-text { flex: 1; }
         .split-text h3 { font-size: 38px; color: var(--gold-accent); margin-bottom: 25px; }
         .split-text p { font-size: 16px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.8; }
-        .split-image { flex: 1; position: relative; }
+        .split-image { flex: 1; position: relative; width: 100%; }
         .split-image img { width: 100%; height: auto; border: 1px solid rgba(255,255,255,0.1); filter: contrast(1.1) brightness(0.9); }
 
         /* --- SIDE CART --- */
@@ -239,6 +240,37 @@
             text-transform: uppercase;
         }
 
+        /* --- BOTON WHATSAPP --- */
+        .whatsapp-btn {
+            position: fixed;
+            width: 55px;
+            height: 55px;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.5);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            background-color: #20b858;
+            color: #FFF;
+        }
+
+        .whatsapp-btn svg {
+            width: 32px;
+            height: 32px;
+            fill: currentColor;
+        }
+
         @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
         @media (max-width: 900px) {
@@ -247,6 +279,8 @@
             header { padding: 15px 30px; }
             .cart-panel { width: 100%; right: -100%; }
             .video-overlay h2 { font-size: 36px; }
+            .whatsapp-btn { bottom: 20px; right: 20px; width: 50px; height: 50px; }
+            .whatsapp-btn svg { width: 28px; height: 28px; }
         }
     </style>
 </head>
@@ -385,8 +419,9 @@
                 </div>
             </div>
             
-            <div class="split-image">
-                <img src="img/taller_laser_cnc.png" alt="Sede ExoLeather León" style="opacity: 0.9; filter: grayscale(20%) contrast(1.1);">
+            <div class="split-image" style="height: 100%; min-height: 350px;">
+                <!-- Mapa de Google invertido en colores para mantener el diseño oscuro -->
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d119421.28781534954!2d-101.76016773335529!3d21.121966145324558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842bbf5280c74149%3A0x6a0a03ff808fcb08!2sLe%C3%B3n%2C%20Gto.!5e0!3m2!1ses!2smx!4v1717585500000!5m2!1ses!2smx" width="100%" height="100%" style="border: 1px solid rgba(192, 158, 87, 0.2); min-height: 350px; filter: invert(90%) hue-rotate(180deg) grayscale(30%);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </section>
@@ -394,12 +429,25 @@
     <footer>
         <img src="img/logo_exoleather_blanco.png" alt="ExoLeather" class="footer-logo"><br>
         <img src="img/sello_cites.png" alt="Certificación CITES" style="width: 60px; margin-bottom: 20px; opacity: 0.5;">
+        
+        <!-- Datos del CEO -->
+        <div style="margin: 20px 0 40px; color: var(--gold-accent); font-family: 'Playfair Display', serif;">
+            <p style="font-size: 18px; margin-bottom: 5px;">J. Giovanni B. Bardales</p>
+            <p style="font-size: 14px; font-family: 'Lato', sans-serif; letter-spacing: 1px;"><a href="mailto:giovannibustillo123@gmail.com" style="color: var(--text-muted); text-decoration: none; transition: color 0.3s;">giovannibustillo123@gmail.com</a></p>
+            <p style="font-size: 10px; font-family: 'Lato', sans-serif; letter-spacing: 3px; color: #555; margin-top: 10px;">CEO & FOUNDER</p>
+        </div>
+
         <p>&copy; 2026 EXOLEATHER. TODOS LOS DERECHOS RESERVADOS.<br>ARTESANÍA VERIFICABLE | LUJO SUSTENTABLE</p>
         
         <div class="academic-disclaimer">
             <strong>AVISO LEGAL Y ACADÉMICO:</strong> Este sitio web es una simulación estructurada exclusivamente como proyecto para la asignatura de Comercialización y mercadotecnia (7° Semestre, Grupo 2) del Departamento de Ingeniería Mecánica Agrícola de la Universidad Autónoma Chapingo, desarrollado por J. Giovanni Bustillo Bardales. ExoLeather no es una entidad comercial operativa. La función de carrito de compras está deshabilitada. No se capturan datos bancarios, no se procesan pagos y no se realiza el envío de ningún artículo. Las imágenes y productos mostrados tienen fines netamente educativos.
         </div>
     </footer>
+
+    <!-- Botón flotante de WhatsApp -->
+    <a href="https://wa.me/526161015778" class="whatsapp-btn" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.88-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.347-.272.297-1.04 1.016-1.04 2.479 0 1.463 1.065 2.876 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+    </a>
 
     <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
     <div class="cart-panel" id="cartPanel">
